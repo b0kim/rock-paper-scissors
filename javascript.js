@@ -31,6 +31,8 @@ ENDFOR
 
 
 */
+const CPU_ID = 0;
+const USER_ID = 1;
 
 function validMove (move) {
     if (typeof move === 'string') {
@@ -42,7 +44,7 @@ function validMove (move) {
     return false;
 }
 
-function generateMove () {
+function getCpuMove () {
     randomMove = Math.floor(Math.random() * 3);
     if (randomMove == 0) {
         return 'rock';
@@ -53,31 +55,55 @@ function generateMove () {
     }
 }
 
-// initialize user and cpu scores
-userScore = cpuScore = 0;
+function getUserMove () {
+    let input = prompt("Let's play rock, paper, scissors. Choose your move!");
+    while (!validMove(input)) {
+        input = prompt("Please choose a valid move: rock, paper, or scissors.")
+    }
+    return input.toLowerCase();
+}
 
-let cpuMove = generateMove();
+function determineWinner (userMove, cpuMove) {
+    if (userMove === cpuMove) {
+        return;
+    } else if ((userMove === 'paper' && cpuMove === 'rock') 
+            || (userMove === 'scissors' && cpuMove === 'paper') 
+            || (userMove === 'rock' && cpuMove === 'scissors')) {
+        return USER_ID;
+    } else {
+        return CPU_ID;
+    }
+}
+
+
+
+
+
+// initialize user and cpu scores
+let userScore = 0;
+let cpuScore = 0;
+
+// Generate cpuMove
+let cpuMove = getCpuMove();
 
 // Prompt user for move until they input a valid move
-let userMove = prompt("Let's' play rock, paper, scissors. Choose your move!");
-while (!validMove(userMove)) {
-    userMove = prompt("Please choose a valid move: rock, paper, or scissors.")
-}
+let userMove = getUserMove();
 
 
-// Determine the winner and notify the user of the result
-if (userMove === cpuMove) {
-    console.log('It was a tie.');
-} else if ((userMove === 'paper' && cpuMove === 'rock') 
-        || (userMove === 'scissors' && cpuMove === 'paper') 
-        || (userMove === 'rock' && cpuMove === 'scissors')) {
-    console.log('You win this round!');
+// Determine the winner 
+winner = determineWinner(userMove, cpuMove);
+
+// Update score tallies and notify user of result
+if (winner == USER_ID) {
     userScore++;
-} else {
-    console.log('You lost this round :(');
+    console.log('You win this round!');
+} else if (winner == CPU_ID) {
     cpuScore++;
+    console.log('You lost this round :(');
+} else {
+    console.log('It was a tie.');
 }
 
-console.log(`Your score: ${userScore}`);
-console.log(`Your opponent's score: ${cpuScore}`);
+console.log(`You chose ${userMove}, your opponent chose ${cpuMove}`);
+console.log(`Your score: ${userScore} vs. Your opponent's score: ${cpuScore}`);
 
