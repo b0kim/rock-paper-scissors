@@ -110,6 +110,14 @@ function playGame () {
     for (let i = 0; i < 5; i++) {
         playRound();
     }
+
+    if (userScore > cpuScore) {
+        alert ("DUB CITY BABY");
+    } else if (cpuScore > userScore) {
+        alert ("YOU LOST LMAOOOOOOOO");
+    } else {
+        alert ("Y'ALL BOTH SOME BUMS");
+    }
 }
 
 playGame();
