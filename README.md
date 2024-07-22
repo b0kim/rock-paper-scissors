@@ -1,0 +1,1 @@
+Create a simple rock paper scissors game that prompts the user for an input
