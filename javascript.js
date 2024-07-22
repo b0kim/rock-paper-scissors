@@ -38,7 +38,7 @@ const USER_ID = 1;
 function validMove (move) {
     if (typeof move === 'string') {
         move = move.toLowerCase();
-        if ((move == 'rock') || (move == 'paper') || (move == 'scissors')) {
+        if ((move === 'rock') || (move === 'paper') || (move === 'scissors')) {
             return true;
         }
     }
@@ -48,10 +48,10 @@ function validMove (move) {
 
 // Randomly generate and return a move for the CPU with equal probabilities
 function getCpuMove () {
-    randomMove = Math.floor(Math.random() * 3);
-    if (randomMove == 0) {
+    let randomMove = Math.floor(Math.random() * 3);
+    if (randomMove === 0) {
         return 'rock';
-    } else if (randomMove == 1) {
+    } else if (randomMove === 1) {
         return 'paper';
     } else {
         return 'scissors';
@@ -99,10 +99,10 @@ function playGame () {
         winner = determineWinner(userMove, cpuMove);
     
         // Update score tallies and notify user of result
-        if (winner == USER_ID) {
+        if (winner === USER_ID) {
             userScore++;
             console.log('You win this round!');
-        } else if (winner == CPU_ID) {
+        } else if (winner === CPU_ID) {
             cpuScore++;
             console.log('You lost this round :(');
         } else {
