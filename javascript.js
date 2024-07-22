@@ -42,24 +42,42 @@ function validMove (move) {
     return false;
 }
 
-let cpuMove;
-
-switch (Math.floor(Math.random() * 3)) {
-    case 0:
-        cpuMove = 'rock';
-        break;
-    case 1:
-        cpuMove = 'paper';
-        break;
-    case 2:
-        cpuMove = 'scissors';
-        break;
+function generateMove () {
+    randomMove = Math.floor(Math.random() * 3);
+    if (randomMove == 0) {
+        return 'rock';
+    } else if (randomMove == 1) {
+        return 'paper';
+    } else {
+        return 'scissors';
+    }
 }
 
-let userMove = prompt("Let's' play rock, paper, scissors. Choose your move!");
+// initialize user and cpu scores
+userScore = cpuScore = 0;
 
+let cpuMove = generateMove();
+
+// Prompt user for move until they input a valid move
+let userMove = prompt("Let's' play rock, paper, scissors. Choose your move!");
 while (!validMove(userMove)) {
     userMove = prompt("Please choose a valid move: rock, paper, or scissors.")
 }
 
+
+// Determine the winner and notify the user of the result
+if (userMove === cpuMove) {
+    console.log('It was a tie.');
+} else if ((userMove === 'paper' && cpuMove === 'rock') 
+        || (userMove === 'scissors' && cpuMove === 'paper') 
+        || (userMove === 'rock' && cpuMove === 'scissors')) {
+    console.log('You win this round!');
+    userScore++;
+} else {
+    console.log('You lost this round :(');
+    cpuScore++;
+}
+
+console.log(`Your score: ${userScore}`);
+console.log(`Your opponent's score: ${cpuScore}`);
 
