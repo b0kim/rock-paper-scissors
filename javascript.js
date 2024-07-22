@@ -75,6 +75,32 @@ function determineWinner (userMove, cpuMove) {
     }
 }
 
+function playRound () {
+    // Generate cpuMove
+    let cpuMove = getCpuMove();
+
+    // Prompt user for move until they input a valid move
+    let userMove = getUserMove();
+
+
+    // Determine the winner 
+    winner = determineWinner(userMove, cpuMove);
+
+    // Update score tallies and notify user of result
+    if (winner == USER_ID) {
+        userScore++;
+        console.log('You win this round!');
+    } else if (winner == CPU_ID) {
+        cpuScore++;
+        console.log('You lost this round :(');
+    } else {
+        console.log('It was a tie.');
+    }
+
+    console.log(`You chose ${userMove}, your opponent chose ${cpuMove}`);
+    console.log(`Your score: ${userScore} vs. Your opponent's score: ${cpuScore}`);
+}
+
 
 
 
@@ -83,27 +109,4 @@ function determineWinner (userMove, cpuMove) {
 let userScore = 0;
 let cpuScore = 0;
 
-// Generate cpuMove
-let cpuMove = getCpuMove();
-
-// Prompt user for move until they input a valid move
-let userMove = getUserMove();
-
-
-// Determine the winner 
-winner = determineWinner(userMove, cpuMove);
-
-// Update score tallies and notify user of result
-if (winner == USER_ID) {
-    userScore++;
-    console.log('You win this round!');
-} else if (winner == CPU_ID) {
-    cpuScore++;
-    console.log('You lost this round :(');
-} else {
-    console.log('It was a tie.');
-}
-
-console.log(`You chose ${userMove}, your opponent chose ${cpuMove}`);
-console.log(`Your score: ${userScore} vs. Your opponent's score: ${cpuScore}`);
-
+playRound();
