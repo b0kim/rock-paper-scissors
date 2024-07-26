@@ -58,15 +58,6 @@ function getCpuMove () {
     }
 }
 
-// Prompt the user for their move until a valid move is inputted, then return the move
-function getUserMove () {
-    let input = prompt("Let's play rock, paper, scissors. Choose your move!");
-    while (!validMove(input)) {
-        input = prompt("Please choose a valid move: rock, paper, or scissors.")
-    }
-    return input.toLowerCase();
-}
-
 // Given user and cpu's moves, which are assumed to be valid, determine the winner
 function determineWinner (userMove, cpuMove) {
     if (userMove === cpuMove) {
@@ -80,55 +71,58 @@ function determineWinner (userMove, cpuMove) {
     }
 }
 
-// When called, playGame plays 5 rounds with the user, keeping a running tally of scores to 
-// determine the winner
-function playGame () {
-    // initialize user and cpu scores
-    let userScore = 0;
-    let cpuScore = 0;
 
-    // When called, plays one round of the game with the user
-    function playRound () {
-        // Generate cpuMove
-        let cpuMove = getCpuMove();
-    
-        // Prompt user for move 
-        let userMove = getUserMove();
-    
-        // Determine the winner 
-        winner = determineWinner(userMove, cpuMove);
-    
-        // Update score tallies and notify user of result
-        if (winner === USER_ID) {
-            userScore++;
-            console.log('You win this round!');
-        } else if (winner === CPU_ID) {
-            cpuScore++;
-            console.log('You lost this round :(');
-        } else {
-            console.log('It was a tie.');
+// initialize user and cpu scores
+let userScore = 0;
+let cpuScore = 0;
+
+buttons = document.querySelectorAll("button");
+buttons.forEach( button => {
+    let userMove = (() => {
+        switch (button.id) {
+            case "rock":
+                return "rock";
+            case "paper":
+                return "paper";
+            case "scissors":
+                return "scissors";
+            default:
+                return "ERROR";
         }
-        
-        // Notify user of the current score
-        console.log(`You chose ${userMove}, your opponent chose ${cpuMove}`);
-        console.log(`Your score: ${userScore} vs. Your opponent's score: ${cpuScore}`);
-    }
+    })();
 
-    // Play 5 rounds of the game
-    for (let i = 0; i < 5; i++) {
-        playRound();
-    }
+    button.addEventListener("click", () => {
+        playRound(userMove)
+    });
+});
 
-    // Alert the user what the outcome of the game is
-    if (userScore > cpuScore) {
-        alert ("DUB CITY BABY");
-    } else if (cpuScore > userScore) {
-        alert ("YOU LOST LMAOOOOOOOO");
+// When called, plays one round of the game with the user
+function playRound (userMove) {
+    // Generate cpuMove
+    let cpuMove = getCpuMove();
+
+    // Determine the winner 
+    winner = determineWinner(userMove, cpuMove);
+
+    // Update score tallies and notify user of result
+    if (winner === USER_ID) {
+        userScore++;
+        console.log('You win this round!');
+    } else if (winner === CPU_ID) {
+        cpuScore++;
+        console.log('You lost this round :(');
     } else {
-        alert ("Y'ALL BOTH SOME BUMS");
+        console.log('It was a tie.');
     }
+    
+    // Notify user of the current score
+    console.log(`You chose ${userMove}, your opponent chose ${cpuMove}`);
+    console.log(`Your score: ${userScore} vs. Your opponent's score: ${cpuScore}`);
 }
 
 
-playGame();
+
+
+
+
 
