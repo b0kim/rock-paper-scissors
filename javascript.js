@@ -104,6 +104,7 @@ function playRound (userMove) {
     // Determine the winner 
     winner = determineWinner(userMove, cpuMove);
 
+
     // Update score tallies and notify user of result
     if (winner === USER_ID) {
         userScore++;
@@ -114,10 +115,14 @@ function playRound (userMove) {
     } else {
         console.log('It was a tie.');
     }
+
+
+    const results = document.querySelector(".results");
+    results.textContent = `Your score: ${userScore} vs. Your opponent's score: ${cpuScore}`;
     
     // Notify user of the current score
     console.log(`You chose ${userMove}, your opponent chose ${cpuMove}`);
-    console.log(`Your score: ${userScore} vs. Your opponent's score: ${cpuScore}`);
+    
 }
 
 
