@@ -104,24 +104,25 @@ function playRound (userMove) {
     // Determine the winner 
     winner = determineWinner(userMove, cpuMove);
 
+    const domResult = document.querySelector(".round_result");
+    let result;
 
     // Update score tallies and notify user of result
     if (winner === USER_ID) {
-        userScore++;
-        console.log('You win this round!');
+        const userScore = document.querySelector(".score_number.user");    
+        userScore.textContent = parseInt(userScore.textContent, 10) + 1;
+        result = "You won the round!<br>"
     } else if (winner === CPU_ID) {
-        cpuScore++;
-        console.log('You lost this round :(');
+        const cpuScore = document.querySelector(".score_number.cpu");
+        cpuScore.textContent = parseInt(cpuScore.textContent, 10) + 1;
+        result = "You lost the round :(<br>"
     } else {
-        console.log('It was a tie.');
+        result = "It was a tie.<br>"
     }
 
-
-    const results = document.querySelector(".results");
-    results.textContent = `Your score: ${userScore} vs. Your opponent's score: ${cpuScore}`;
-    
-    // Notify user of the current score
-    console.log(`You chose ${userMove}, your opponent chose ${cpuMove}`);
+    // Notify user of result
+    result += `You chose ${userMove}, your opponent chose ${cpuMove}`
+    domResult.innerHTML = result;
     
 }
 
