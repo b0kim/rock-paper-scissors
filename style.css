@@ -1,7 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    background: black;
+    color: white;
+    font-family: "Pixelify Sans", sans-serif;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.choices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    padding-right: 5rem;
+    
+}
+
+.choice_button {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+}
+
+.choices img {
+    max-width: 15rem;
+    max-height: auto;
+}
+
+.scissors img {
+    max-width: 10rem;
+}
+
+.results {
+    text-align: center;
 }
